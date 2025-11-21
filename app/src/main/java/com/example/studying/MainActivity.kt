@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             val name = username.text.toString()
             val phone = usermobilenumber.text.toString()
             val category = usercategory.text.toString()
-       //just simple validation
+            //just simple validation
             if (name.isEmpty() || phone.isEmpty() || category.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
@@ -82,8 +82,7 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
-
-        // thirs lets make the show all button logic
+        // third lets make the show all button logic
         showallbutton.setOnClickListener {
             //just call the function that get all the contacts
             showAllContacts()
