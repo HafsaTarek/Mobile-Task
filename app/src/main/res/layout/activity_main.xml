@@ -1,68 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#EB91AE">
 
-
-
-    <!-- Top Space Guideline -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuideBegin="80dp" />
-
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="To-Do List"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/guidelineTop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Input Box -->
+    <!-- taking the name as an input from the user  -->
     <EditText
-        android:id="@+id/etItem"
+        android:id="@+id/etName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Add new task"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
+        android:hint="Contact Name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnAdd"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Add Button -->
+    <!-- taking the phone number  as an input from the user -->
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etName" />
+
+    <!-- taking the category as an input from the user -->
+    <EditText
+        android:id="@+id/etCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:hint="Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPhone" />
+
+    <!-- making the save button -->
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#DBC5C5"
+        android:text="Save Contact"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCategory" />
 
-    <!-- ListView -->
+    <!-- and adding just a text to explain to the user what to make   -->
+    <TextView
+        android:id="@+id/tvOptionsInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:padding="6dp"
+        android:text="Search:\n•Choose a category and press filter to view its contacts.\n•Press show all so display all contacts."
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSave" />
+
+    <!-- making the spinner for the all categroies we have  -->
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvOptionsInfo" />
+
+    <!-- button to filter based on the choosed category on the spinner -->
+    <Button
+        android:id="@+id/btnFilter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:background="#EDD1D1"
+        android:text="Filter"
+        app:layout_constraintEnd_toStartOf="@id/btnShowAll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spCategory" />
+
+    <!-- show all button to get all the contacts from the data base without any condition -->
+    <Button
+        android:id="@+id/btnShowAll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:background="#F8D9D9"
+        android:text="Show All"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnFilter"
+        app:layout_constraintTop_toBottomOf="@id/spCategory" />
+
+    <!-- list of all contacts we have  -->
     <ListView
-        android:id="@+id/lstItems"
+        android:id="@+id/lvContacts"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/etItem"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"/>
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnFilter" />
 </androidx.constraintlayout.widget.ConstraintLayout>

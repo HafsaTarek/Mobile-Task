@@ -1,8 +1,10 @@
 package com.example.studying
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
+@Dao
 interface ContactsDao {
     @Insert
     suspend fun insert(contact: Contact)
@@ -14,5 +16,8 @@ interface ContactsDao {
     // get all the conatcts
     @Query("SELECT * FROM contacts ")
     suspend fun getAllContacts(): List<Contact>
+    //getting all the distinct categories from the database to appear them in the spinner
+    @Query("SELECT DISTINCT category FROM contacts ")
+    suspend fun getAllUniqueCategries(): List<String>
 
 }
