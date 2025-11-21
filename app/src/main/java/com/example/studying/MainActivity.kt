@@ -82,3 +82,49 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
+        // third lets make the show all button logic
+        showallbutton.setOnClickListener {
+            //just call the function that get all the contacts
+            showAllContacts()
+        }
+
+        // now lets make the last step which is when i press on specific contact make intent
+        showallcontacts.setOnItemClickListener { _, _, position, _ ->
+            lifecycleScope.launch {
+                val allContacts = contactDao.getAllContacts()
+                val contact = allContacts[position]
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:${contact.phone}")
+                startActivity(intent)
+            }
+        }
+    }
+
+    // now this is just helper functions to not duplicate the code
+    //this to use it in the list and in the show all button
+    private fun showAllContacts() {
+        lifecycleScope.launch {
+            val all = contactDao.getAllContacts()
+            val names = all.map { "${it.name} • ${it.category}" }
+            showallcontacts.adapter = ArrayAdapter(
+                this@MainActivity,
+                android.R.layout.simple_list_item_1,
+                names
+            )
+        }
+    }
+
+
+    private fun loadCategories() {
+        lifecycleScope.launch {
+            val categories = contactDao.getAllUniqueCategries()
+            val adapter = ArrayAdapter(
+                this@MainActivity,
+                android.R.layout.simple_spinner_item,
+                categories
+            )
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            showcategories.adapter = adapter
+        }
+    }
+}
